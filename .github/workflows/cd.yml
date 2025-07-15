@@ -54,9 +54,9 @@ jobs:
             export DOCKER_IMAGE_TAG=latest
             export DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}
             export DOCKER_HUB_PASSWORD=${{ secrets.DOCKER_HUB_PASSWORD }}
+            docker compose pull 
+            docker compose up -d
             
-            docker compose pull & docker compose up -d # 서비스 실행
-      
       - name: Clean Up Files in Server # 이후 docker-compose.yml 파일 삭제
         if: always()
         uses: appleboy/ssh-action@v1.1.0
