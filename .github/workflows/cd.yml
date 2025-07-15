@@ -13,15 +13,6 @@ jobs:
       - name: Checkout code # 코드 클론
         uses: actions/checkout@v4
 
-      - name: Copy files to temp dir
-        run: |
-          mkdir deploy_files
-          cp docker-compose.yml deploy_files/
-          cp nginx.conf deploy_files/
-          cp prometheus.yml deploy_files/
-          cp promtail-config.yml deploy_files/
-          cp loki-config.yml deploy_files/
-          cp .env deploy_files/
 
       - name: Copy directory to Server
         id: copy
@@ -30,7 +21,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
-          source: deploy_files/*
+          source: docker-compose.yml nginx.conf prometheus.yml promtail-config.yml loki-config.yml .env
           target: /home/chlowoomin/
 
       - name: Deploy the app # 배포중 메시지 출력
