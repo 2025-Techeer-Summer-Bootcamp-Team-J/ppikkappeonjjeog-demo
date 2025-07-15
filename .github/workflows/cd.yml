@@ -34,12 +34,13 @@ jobs:
       
       - name: Deploy to Server # 복사된 docker-compose.yml 파일을 실행
         id: deploy
-        uses: appleboy/ssh-action@v1.1.0
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
           script: |
+            cd /home/chlowoomin/
             docker compose down
             docker compose pull
             docker compose up -d
