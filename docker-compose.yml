@@ -107,7 +107,7 @@ services:
       start_period: 10s
 
   celery:
-    build: .
+    image: chlwoomin/ppikkappeonjjeog:latest
     container_name: celery
     command: celery -A config.celery worker --loglevel=info
     volumes:
