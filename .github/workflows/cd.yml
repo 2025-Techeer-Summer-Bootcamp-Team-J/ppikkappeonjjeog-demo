@@ -13,15 +13,6 @@ jobs:
       - name: Checkout code # 코드 클론
         uses: actions/checkout@v4
 
-      - name: Deploy the app # 배포중 메시지 출력
-        run: echo "Deploying the app..."
-      - name: 확인용 디버깅 - 파일 목록 출력
-        run: |
-          echo "==== 현재 경로 ===="
-          pwd
-          echo "==== 현재 디렉토리의 파일들 ===="
-          ls -al
-
       - name: Copy files to temp dir
         run: |
           mkdir deploy_files
@@ -39,8 +30,17 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
-          source: docker-compose.yml
+          source: deploy_files/*
           target: /home/chlowoomin/
+
+      - name: Deploy the app # 배포중 메시지 출력
+        run: echo "Deploying the app..."
+      - name: 확인용 디버깅 - 파일 목록 출력
+        run: |
+          echo "==== 현재 경로 ===="
+          pwd
+          echo "==== 현재 디렉토리의 파일들 ===="
+          ls -al
       
       - name: Deploy to Server # 복사된 docker-compose.yml 파일을 실행
         id: deploy
