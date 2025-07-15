@@ -52,4 +52,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
           script: |
-            rm -f /home/chlowoomin/docker-compose.yml
+            rm -f /home/chlowoomin/docker-compose.yml /home/chlowoomin/nginx.conf /home/chlowoomin/.env /home/chlowoomin/prometheus.yml /home/chlowoomin/promtail-config.yml /home/chlowoomin/loki-config.yml
