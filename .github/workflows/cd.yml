@@ -26,6 +26,12 @@ jobs:
           source: "docker-compose.yml nginx.conf prometheus.yml promtail-config.yml loki-config.yml"
           target: /home/chlowoomin/
       
+      - name: 확인용 디버깅 - 파일 목록 출력
+        run: |
+          echo "==== 현재 경로 ===="
+          pwd
+          echo "==== 현재 디렉토리의 파일들 ===="
+          ls -al
       - name: Deploy to Server # 복사된 docker-compose.yml 파일을 실행
         id: deploy
         uses: appleboy/ssh-action@v1.1.0
