@@ -22,14 +22,23 @@ jobs:
           echo "==== 현재 디렉토리의 파일들 ===="
           ls -al
 
-      - name: Copy file to Server # docker-compose.yml파일을 서버로 복사
+      - name: Copy files to temp dir
+        run: |
+          mkdir deploy_files
+          cp docker-compose.yml deploy_files/
+          cp nginx.conf deploy_files/
+          cp prometheus.yml deploy_files/
+          cp promtail-config.yml deploy_files/
+          cp loki-config.yml deploy_files/
+
+      - name: Copy directory to Server
         id: copy
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
-          source: docker-compose.yml nginx.conf prometheus.yml promtail-config.yml loki-config.yml
+          source: deploy_files/
           target: /home/chlowoomin/
       
       - name: Deploy to Server # 복사된 docker-compose.yml 파일을 실행
