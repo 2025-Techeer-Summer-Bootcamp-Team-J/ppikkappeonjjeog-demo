@@ -30,6 +30,7 @@ jobs:
           cp prometheus.yml deploy_files/
           cp promtail-config.yml deploy_files/
           cp loki-config.yml deploy_files/
+          cp .env deploy_files/
 
       - name: Copy directory to Server
         id: copy
@@ -49,6 +50,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
           script: |
+            cd /home/chlowoomin/
             export DOCKER_IMAGE_TAG=latest
             export DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}
             export DOCKER_HUB_PASSWORD=${{ secrets.DOCKER_HUB_PASSWORD }}
