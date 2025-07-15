@@ -40,9 +40,9 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
           script: |
-            pwd
-            ls -al
-            docker compose pull & docker compose up -d # 서비스 실행
+            docker compose down
+            docker compose pull
+            docker compose up -d
 
       - name: Clean Up Files in Server # 이후 docker-compose.yml 파일 삭제
         if: always()
