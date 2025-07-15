@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
           source: docker-compose.yml
-          target: /home/ubuntu/
+          target: /home/chlowoomin/
       
       - name: Deploy to Server # 복사된 docker-compose.yml 파일을 실행
         id: deploy
@@ -48,4 +48,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
           script: |
-            rm -f /home/ubuntu/docker-compose.yml
+            rm -f /home/chlowoomin/docker-compose.yml
