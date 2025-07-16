@@ -44,8 +44,8 @@ services:
   backend:
     image: chlwoomin/ppikkappeonjjeog:latest
     container_name: backend
-    ports:
-      - "${BACKEND_PORT}:8000"
+    expose:
+      - "8000"
     env_file:
       - .env
     depends_on:
@@ -72,8 +72,8 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    ports:
-      - "${MYSQL_PORT}:3306"
+    expose:
+      - "3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -90,8 +90,8 @@ services:
   redis:
     image: redis:latest
     container_name: backend-redis
-    ports:
-      - "${REDIS_PORT}:6379"
+    expose:
+      - "6379"
     volumes:
       - redis_data:/data
     networks:
@@ -108,8 +108,8 @@ services:
   rabbitmq:
     image: rabbitmq:latest
     container_name: rabbitmq
-    ports:
-      - "${RABBITMQ_PORT}:5672"
+    expose:
+      - "5672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     networks:
@@ -151,8 +151,8 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
-    ports:
-      - "${PROMETHEUS_PORT}:9090"
+    expose:
+      - "9090"
     networks:
       - backend-network
     
@@ -160,8 +160,8 @@ services:
   cadvisor:
     image: bitnami/cadvisor:latest
     container_name: cadvisor
-    ports:
-      - "${CADVISOR_PORT}:8080"
+    expose:
+      - "8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -178,8 +178,8 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
-    ports:
-      - "${GRAFANA_PORT}:3000"
+    expose:
+      - "3000"
     depends_on:
       - prometheus
     networks:
@@ -188,8 +188,8 @@ services:
   loki:
     image: grafana/loki:latest
     container_name: loki
-    ports:
-      - "${LOKI_PORT}:3100"
+    expose:
+      - "3100"
     volumes:
       - ./loki-config.yml:/etc/loki/loki-config.yml
     command: -config.file=/etc/loki/loki-config.yml
