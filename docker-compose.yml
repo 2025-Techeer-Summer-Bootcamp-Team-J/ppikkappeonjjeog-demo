@@ -20,7 +20,6 @@ services:
       backend:
         condition: service_healthy
     restart: unless-stopped
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/health"]
       interval: 30s
