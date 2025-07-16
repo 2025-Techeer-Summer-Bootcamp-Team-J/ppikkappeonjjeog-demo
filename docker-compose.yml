@@ -53,7 +53,7 @@ services:
       - redis
       - rabbitmq
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://34.22.93.83:8000/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
       interval: 30s
       timeout: 10s
       retries: 3
