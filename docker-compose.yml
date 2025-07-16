@@ -115,9 +115,7 @@ services:
   celery:
     image: chlwoomin/ppikkappeonjjeog:latest
     container_name: celery
-    command: celery -A config.celery worker --loglevel=info
-    volumes:
-      - .:/app
+    command: celery -A app.config.celery worker --loglevel=info
     networks:
       - backend-network
     depends_on:
