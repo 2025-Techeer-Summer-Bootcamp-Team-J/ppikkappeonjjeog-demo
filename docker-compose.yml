@@ -45,6 +45,10 @@ services:
       - "${BACKEND_PORT}:8000"
     env_file:
       - .env
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq
     healthcheck:
       test: ["CMD", "curl", "-f", "http://34.22.93.83:8000/"]
       interval: 30s
@@ -115,7 +119,7 @@ services:
   celery:
     image: chlwoomin/ppikkappeonjjeog:latest
     container_name: celery
-    command: celery -A config worker --loglevel=info
+    command: celery -A celery.config worker --loglevel=info
     networks:
       - backend-network
     depends_on:
