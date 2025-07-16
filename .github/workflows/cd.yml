@@ -20,7 +20,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
-          source: "docker-compose.yml,nginx.conf,prometheus.yml,promtail-config.yml,loki-config.yml,.env"
+          source: "docker-compose.yml,nginx.conf,prometheus.yml,promtail-config.yml,loki-config.yml"
           target: /home/chlowoomin/
 
       - name: Deploy the app # 배포중 메시지 출력
@@ -53,4 +53,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PASSWORD }}
           script: |
-            rm -f /home/chlowoomin/docker-compose.yml /home/chlowoomin/nginx.conf /home/chlowoomin/.env /home/chlowoomin/prometheus.yml /home/chlowoomin/promtail-config.yml /home/chlowoomin/loki-config.yml
+            rm -f /home/chlowoomin/docker-compose.yml /home/chlowoomin/nginx.conf /home/chlowoomin/prometheus.yml /home/chlowoomin/promtail-config.yml /home/chlowoomin/loki-config.yml
