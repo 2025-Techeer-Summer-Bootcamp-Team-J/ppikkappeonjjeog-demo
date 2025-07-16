@@ -122,8 +122,12 @@ services:
     command: celery -A config.celery.app worker --loglevel=info
     networks:
       - backend-network
+    env_file:
+      - .env
     depends_on:
       - rabbitmq
+      - backend
+      - redis
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "celery", "inspect", "ping"]
