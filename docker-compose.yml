@@ -16,7 +16,7 @@ services:
       - ./certbot/www:/var/www/certbot
     labels:
       logging: "promtail"
-      logging_jobname: "containerlogs"
+      logging_jobname: "nginx"
     networks:
       - backend-network
     depends_on:
@@ -49,7 +49,7 @@ services:
     container_name: backend
     labels:
       logging: "promtail"
-      logging_jobname: "containerlogs"
+      logging_jobname: "backend"
     expose:
       - "8000"
     env_file:
@@ -98,7 +98,7 @@ services:
     container_name: backend-redis
     labels:
       logging: "promtail"
-      logging_jobname: "containerlogs"
+      logging_jobname: "redis"
     expose:
       - "6379"
     volumes:
@@ -119,7 +119,7 @@ services:
     container_name: rabbitmq
     labels:
       logging: "promtail"
-      logging_jobname: "containerlogs"
+      logging_jobname: "rabbitmq"
     expose:
       - "5672"
     volumes:
@@ -138,7 +138,7 @@ services:
     container_name: celery
     labels:
       logging: "promtail"
-      logging_jobname: "containerlogs"
+      logging_jobname: "celery"
     command: celery -A config.celery.app worker --loglevel=info
     networks:
       - backend-network
@@ -164,7 +164,7 @@ services:
     container_name: prometheus
     labels:
       logging: "promtail"
-      logging_jobname: "containerlogs"
+      logging_jobname: "prometheus"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     command:
@@ -180,7 +180,7 @@ services:
     container_name: cadvisor
     labels:
       logging: "promtail"
-      logging_jobname: "containerlogs"
+      logging_jobname: "cadvisor"
     ports:
       - "8080:8080"
     volumes:
