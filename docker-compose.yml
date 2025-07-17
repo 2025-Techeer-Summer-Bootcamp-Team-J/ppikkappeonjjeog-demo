@@ -11,9 +11,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./logs/nginx:/var/log/nginx
-      - ./ssl:/etc/nginx/ssl
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+
     networks:
       - backend-network
     depends_on:
@@ -158,7 +156,7 @@ services:
     
 # cadvisor
   cadvisor:
-    image: bitnami/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     ports:
       - "8080:8080"
@@ -167,7 +165,6 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
     restart: always
     networks:
       - backend-network
@@ -190,8 +187,6 @@ services:
     container_name: loki
     ports:
       - "3100:3100"
-    volumes:
-      - ./loki-config.yml:/etc/loki/loki-config.yml
     command: -config.file=/etc/loki/loki-config.yml
     networks:
       - backend-network
@@ -201,7 +196,6 @@ services:
     image: grafana/promtail:latest
     container_name: promtail
     volumes:
-      - ./logs:/var/log
       - ./promtail-config.yml:/etc/promtail/promtail.yml
       - /var/run/docker.sock:/var/run/docker.sock
     command: -config.file=/etc/promtail/promtail.yml
