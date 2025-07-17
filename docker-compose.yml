@@ -189,6 +189,8 @@ services:
     container_name: loki
     ports:
       - "3100:3100"
+    volumes:
+      - ./loki-config.yml:/etc/loki/loki-config.yml
     command: -config.file=/etc/loki/loki-config.yml
     networks:
       - backend-network
