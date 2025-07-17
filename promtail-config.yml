@@ -12,7 +12,8 @@ scrape_configs:
   - job_name: system
     static_configs:
       - targets:
-          - localhost
+          - backend:8000
+          - nginx:80
         labels:
           job: varlogs
           __path__: /var/log/*.log
