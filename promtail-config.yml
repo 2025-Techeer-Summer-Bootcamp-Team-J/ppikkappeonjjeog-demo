@@ -28,3 +28,10 @@ scrape_configs:
         target_label: 'port'
       - source_labels: ['__meta_docker_network_ip'] #로그 라벨링
         target_label: 'ip'
+  - job_name: nginx_scrape
+    static_configs:
+      - targets:
+          - nginx
+        labels:
+          job: nginx
+          __path__: /var/log/nginx/*.log
