@@ -169,8 +169,8 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
-    ports:
-      - "9090:9090"
+    expose:
+      - "9090"
     networks:
       - backend-network
     
@@ -181,8 +181,8 @@ services:
     labels:
       logging: "promtail"
       logging_jobname: "cadvisor"
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -208,8 +208,8 @@ services:
   loki:
     image: grafana/loki:latest
     container_name: loki
-    ports:
-      - "3100:3100"
+    expose:
+      - "3100"
     volumes:
       - ./loki-config.yml:/etc/loki/loki-config.yml
     command: -config.file=/etc/loki/loki-config.yml
