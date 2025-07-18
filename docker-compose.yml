@@ -201,6 +201,9 @@ services:
       - "3000"
     depends_on:
       - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - grafana_data:/etc/grafana/provisioning
     networks:
       - backend-network
 
