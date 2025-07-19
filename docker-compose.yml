@@ -236,6 +236,7 @@ networks:
     driver: bridge
 
 volumes:
+  grafana_data:
   mysql_data:
   redis_data:
   rabbitmq_data:
