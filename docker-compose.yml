@@ -164,6 +164,8 @@ services:
       logging_jobname: "celery"
     networks:
       - backend-network
+    env_file:
+      - .env
     depends_on:
       - redis
       - rabbitmq
