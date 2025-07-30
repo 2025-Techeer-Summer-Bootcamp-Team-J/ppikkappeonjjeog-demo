@@ -147,6 +147,7 @@ services:
       - rabbitmq
       - backend
       - redis
+      - mysql
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "celery", "inspect", "ping"]
@@ -169,6 +170,7 @@ services:
     depends_on:
       - redis
       - rabbitmq
+      - mysql
     restart: unless-stopped
 # 프로메테우스 메트릭 수집
 
