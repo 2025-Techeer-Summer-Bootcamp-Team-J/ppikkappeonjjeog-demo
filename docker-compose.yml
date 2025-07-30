@@ -155,7 +155,21 @@ services:
       retries: 5
       start_period: 10s
 
-
+  celery-beat:
+    build: .
+    container_name: celery-beat
+    command: celery -A config.celery.app beat --loglevel=info
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/summerbootcamp-d4f6ec4850e7.json
+    volumes:
+      - .:/app
+      - ./credentials/summerbootcamp-d4f6ec4850e7.json:/app/credentials/summerbootcamp-d4f6ec4850e7.json
+    networks:
+      - backend-network
+    depends_on:
+      - redis
+      - rabbitmq
+    restart: unless-stopped
 # 프로메테우스 메트릭 수집
 
   prometheus:
