@@ -156,7 +156,7 @@ services:
       start_period: 10s
 
   celery-beat:
-    build: .
+    image: chlwoomin/ppikkappeonjjeog:latest
     container_name: celery-beat
     command: celery -A config.celery.app beat --loglevel=info
     environment:
