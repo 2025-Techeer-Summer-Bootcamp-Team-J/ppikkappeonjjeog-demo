@@ -159,6 +159,9 @@ services:
     image: chlwoomin/ppikkappeonjjeog:latest
     container_name: celery-beat
     command: celery -A config.celery.app beat --loglevel=info
+    labels:
+      logging: "promtail"
+      logging_jobname: "celery"
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/summerbootcamp-d4f6ec4850e7.json
     volumes:
